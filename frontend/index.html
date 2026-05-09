@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataScribe Pro — AI Database Explorer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0f1117;
+      --sidebar-bg:  #161b22;
+      --surface:     #1c2128;
+      --surface2:    #21262d;
+      --border:      #30363d;
+      --accent:      #2f81f7;
+      --accent-dim:  #1f6feb44;
+      --green:       #3fb950;
+      --red:         #f85149;
+      --yellow:      #e3b341;
+      --text:        #e6edf3;
+      --text-muted:  #7d8590;
+      --user-bubble: #2f81f7;
+      --ai-bubble:   #1c2128;
+      --radius:      12px;
+      --font:        -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono:        "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Header ────────────────────────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 20px;
+      height: 54px;
+      background: var(--sidebar-bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .logo { font-size: 20px; }
+    .app-name { font-weight: 700; font-size: 15px; letter-spacing: -0.3px; }
+    .app-sub  { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .provider-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 8px;
+      border-radius: 20px; border: 1px solid var(--border);
+      color: var(--text-muted); background: var(--surface2);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .conn-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--red); transition: background .3s;
+    }
+    .conn-dot.connected { background: var(--green); }
+    .btn-icon {
+      background: none; border: 1px solid var(--border); color: var(--text-muted);
+      border-radius: 8px; padding: 5px 10px; cursor: pointer; font-size: 12px;
+      transition: all .15s;
+    }
+    .btn-icon:hover { background: var(--surface2); color: var(--text); }
+
+    /* ── Layout ────────────────────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────────────────── */
+    aside {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-section {
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .db-name {
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .db-status { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+    .table-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 8px;
+    }
+    .table-list::-webkit-scrollbar { width: 4px; }
+    .table-list::-webkit-scrollbar-track { background: transparent; }
+    .table-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .table-item {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 8px; border-radius: 6px; font-size: 12px;
+      color: var(--text-muted); cursor: pointer; transition: all .15s;
+    }
+    .table-item:hover { background: var(--surface2); color: var(--text); }
+    .table-item .ti-icon { font-size: 10px; }
+    .no-tables { font-size: 12px; color: var(--text-muted); padding: 8px; font-style: italic; }
+
+    .layer-pills { display: flex; flex-direction: column; gap: 4px; padding: 10px 14px; }
+    .pill {
+      font-size: 10px; padding: 4px 8px; border-radius: 6px;
+      border: 1px solid var(--border); color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .pill .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Chat area ─────────────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .messages::-webkit-scrollbar { width: 6px; }
+    .messages::-webkit-scrollbar-track { background: transparent; }
+    .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ── Message rows ──────────────────────────────────────────────────── */
+    .msg-row {
+      display: flex;
+      padding: 4px 24px;
+      gap: 12px;
+      animation: fadeUp .2s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg-row.user { flex-direction: row-reverse; }
+
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; margin-top: 2px;
+    }
+    .avatar.user-av { background: var(--accent); }
+    .avatar.ai-av   { background: var(--surface2); border: 1px solid var(--border); }
+
+    .bubble {
+      max-width: min(640px, 75%);
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .bubble.user {
+      background: var(--user-bubble);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .bubble.ai {
+      background: var(--ai-bubble);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+      color: var(--text);
+    }
+
+    /* Markdown inside AI bubble */
+    .bubble.ai h1,.bubble.ai h2,.bubble.ai h3 { margin: 12px 0 6px; font-size: 14px; color: var(--accent); }
+    .bubble.ai p  { margin: 6px 0; }
+    .bubble.ai ul,.bubble.ai ol { padding-left: 18px; margin: 6px 0; }
+    .bubble.ai li { margin: 3px 0; }
+    .bubble.ai code {
+      font-family: var(--mono); font-size: 12px;
+      background: var(--surface2); padding: 2px 5px; border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .bubble.ai pre {
+      background: #0d1117; border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px; margin: 8px 0;
+      overflow-x: auto;
+    }
+    .bubble.ai pre code { background: none; border: none; padding: 0; font-size: 12px; }
+    .bubble.ai table { border-collapse: collapse; font-size: 12px; margin: 8px 0; width: 100%; }
+    .bubble.ai th,.bubble.ai td { border: 1px solid var(--border); padding: 5px 8px; text-align: left; }
+    .bubble.ai th { background: var(--surface2); }
+    .bubble.ai strong { color: var(--text); }
+    .bubble.ai blockquote { border-left: 3px solid var(--accent); padding-left: 10px; color: var(--text-muted); margin: 6px 0; }
+
+    /* ── Status / plan chips ───────────────────────────────────────────── */
+    .status-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 4px 24px 4px 68px;
+      font-size: 12px; color: var(--text-muted);
+    }
+    .spinner {
+      width: 12px; height: 12px; border: 2px solid var(--border);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin .7s linear infinite; flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .plan-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; padding: 3px 9px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface2);
+      color: var(--text-muted); margin: 2px;
+    }
+    .plan-chip.inference { border-color: var(--accent); color: var(--accent); }
+    .plan-chip.active    { background: var(--accent-dim); }
+    .plan-chip.done      { color: var(--green); border-color: var(--green); }
+
+    .plan-row {
+      display: flex; flex-wrap: wrap; align-items: center;
+      padding: 4px 24px 4px 68px; gap: 4px;
+    }
+    .plan-label { font-size: 11px; color: var(--text-muted); margin-right: 4px; }
+
+    /* ── Typing dots ───────────────────────────────────────────────────── */
+    .typing-dots { display: flex; gap: 4px; align-items: center; padding: 8px 0; }
+    .typing-dots span {
+      width: 6px; height: 6px; background: var(--text-muted);
+      border-radius: 50%; animation: bounce .8s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: .15s; }
+    .typing-dots span:nth-child(3) { animation-delay: .30s; }
+    @keyframes bounce {
+      0%,80%,100% { transform: translateY(0); opacity: .4; }
+      40%          { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* ── Meta bar (latency, model) ─────────────────────────────────────── */
+    .meta-bar {
+      font-size: 11px; color: var(--text-muted);
+      padding: 2px 0 4px 68px; display: flex; gap: 10px;
+    }
+    .meta-bar span { display: flex; align-items: center; gap: 3px; }
+
+    /* ── Welcome card ──────────────────────────────────────────────────── */
+    .welcome {
+      text-align: center; padding: 40px 24px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .welcome h2 { font-size: 22px; font-weight: 700; }
+    .welcome p  { font-size: 14px; color: var(--text-muted); max-width: 480px; line-height: 1.6; }
+    .suggestions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }
+    .suggestion-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-muted); border-radius: 20px;
+      padding: 8px 14px; font-size: 13px; cursor: pointer; transition: all .15s;
+    }
+    .suggestion-btn:hover { background: var(--surface2); color: var(--text); border-color: var(--accent); }
+
+    /* ── Input bar ─────────────────────────────────────────────────────── */
+    .input-wrap {
+      padding: 12px 24px 18px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .input-row {
+      display: flex; gap: 8px; align-items: flex-end;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 8px 8px 8px 16px;
+      transition: border-color .15s;
+    }
+    .input-row:focus-within { border-color: var(--accent); }
+    textarea {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--text); font-family: var(--font); font-size: 14px;
+      resize: none; max-height: 160px; line-height: 1.5; padding: 4px 0;
+    }
+    textarea::placeholder { color: var(--text-muted); }
+    .send-btn {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--accent); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 16px; flex-shrink: 0;
+      transition: all .15s; opacity: 0.5;
+    }
+    .send-btn.ready { opacity: 1; }
+    .send-btn:hover.ready { background: #388bfd; transform: scale(1.05); }
+    .input-hint { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────────────────────── -->
+<header>
+  <span class="logo">🔍</span>
+  <div>
+    <div class="app-name">DataScribe Pro</div>
+    <div class="app-sub">AI-Powered Database Explorer</div>
+  </div>
+  <div class="header-right">
+    <span class="provider-badge" id="providerBadge">–</span>
+    <span class="conn-dot" id="connDot" title="Connection status"></span>
+    <button class="btn-icon" onclick="resetSession()" title="Clear session &amp; schema">↺ Reset</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ── Sidebar ───────────────────────────────────────────────────────────── -->
+  <aside>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Database</div>
+      <div class="db-name">🗄️ <span id="dbName">chinook.db</span></div>
+      <div class="db-status" id="dbStatus">Connecting…</div>
+    </div>
+
+    <div class="sidebar-section" style="flex:1;overflow:hidden;display:flex;flex-direction:column;">
+      <div class="sidebar-label">Schema (<span id="tableCount">0</span> tables)</div>
+      <div class="table-list" id="tableList">
+        <div class="no-tables">Ask a question to discover the schema.</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);">
+      <div class="sidebar-label" style="padding:10px 14px 0;">Active Layers</div>
+      <div class="layer-pills">
+        <div class="pill"><span class="dot" style="background:#dae8fc;"></span>L1 Consumer (FastAPI)</div>
+        <div class="pill"><span class="dot" style="background:#e1d5e7;"></span>L2 AI Gateway</div>
+        <div class="pill"><span class="dot" style="background:#d5e8d4;"></span>L3 Orchestration</div>
+        <div class="pill"><span class="dot" style="background:#ffe6cc;"></span>L4 Model Layer</div>
+        <div class="pill"><span class="dot" style="background:#fff2cc;"></span>L5 RAG (Schema)</div>
+        <div class="pill"><span class="dot" style="background:#f8cecc;"></span>L6 Security (R/O)</div>
+        <div class="pill"><span class="dot" style="background:#f5f5f5;"></span>L7 Infrastructure</div>
+        <div class="pill"><span class="dot" style="background:#d5f5e3;"></span>L8 Observability</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main chat ──────────────────────────────────────────────────────────── -->
+  <main>
+    <div class="messages" id="messages">
+      <!-- Welcome card -->
+      <div class="welcome" id="welcomeCard">
+        <div style="font-size:48px;">🔍</div>
+        <h2>Ask anything about your database</h2>
+        <p>I can explore the schema, run read-only queries, and explain relationships — all in plain English.</p>
+        <div class="suggestions">
+          <button class="suggestion-btn" onclick="suggest(this)">What tables are in this database?</button>
+          <button class="suggestion-btn" onclick="suggest(this)">Who are the top 5 artists by track count?</button>
+          <button class="suggestion-btn" onclick="suggest(this)">Show me total sales by country</button>
+          <button class="suggestion-btn" onclick="suggest(this)">What genres are available?</button>
+          <button class="suggestion-btn" onclick="suggest(this)">How many customers does each employee manage?</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-wrap">
+      <div class="input-row">
+        <textarea
+          id="questionInput"
+          rows="1"
+          placeholder="Ask a question about your database…"
+          onkeydown="handleKey(event)"
+          oninput="handleInput(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendQuestion()" title="Send (Enter)">↑</button>
+      </div>
+      <div class="input-hint">Enter to send · Shift+Enter for new line · Read-only · All 8 layers active</div>
+    </div>
+  </main>
+
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

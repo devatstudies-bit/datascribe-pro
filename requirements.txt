@@ -1,0 +1,33 @@
+# Web framework
+fastapi
+uvicorn[standard]
+python-multipart
+aiofiles
+
+# LangChain / LangGraph  (let pip resolve compatible versions)
+langchain
+langchain-openai
+langchain-community
+langgraph
+
+# LangChain AWS Bedrock (optional — comment out if not using AWS)
+langchain-aws
+boto3
+
+# SQL
+sqlalchemy
+sqlglot
+
+# Schema graph
+networkx
+
+# Config / env
+pydantic-settings
+python-dotenv
+
+# Observability (Layer 8)
+structlog
+prometheus-client
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp-proto-grpc

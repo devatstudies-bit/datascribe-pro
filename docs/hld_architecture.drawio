@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1820" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- TITLE                                                      -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="10" value="&lt;b&gt;DataScribe Pro — Production AI Database Discovery System&lt;/b&gt;&lt;br&gt;Cloud-Agnostic · Read-Only Enforced · LangChain + LangGraph · 8-Layer Agentic Architecture"
+      style="text;html=1;strokeColor=#1a1a2e;fillColor=#1a1a2e;fontColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=14;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="10" width="1760" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- EXTERNAL CONSUMERS                                         -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="100" value="&lt;b&gt;EXTERNAL CONSUMERS&lt;/b&gt;"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#888888;fontSize=11;verticalAlign=top;align=center;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="85" width="1360" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="101" value="🌐 Web App"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#888888;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="35" y="108" width="150" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="102" value="📱 Mobile App"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#888888;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="200" y="108" width="150" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="103" value="⌨️ CLI Tool"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#888888;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="365" y="108" width="150" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="104" value="📊 BI Tools"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#888888;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="530" y="108" width="150" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="105" value="💬 Slack Bot"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#888888;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="695" y="108" width="150" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="106" value="🔧 Internal Tools"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#888888;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="860" y="108" width="150" height="38" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: Consumers → L1 -->
+    <mxCell id="e001" value="HTTPS / WebSocket / gRPC"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#555555;"
+      edge="1" source="100" target="200" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 1 — CONSUMER LAYER                                   -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="200" value="&lt;b&gt;LAYER 1 — CONSUMER LAYER&lt;/b&gt;  |  FastAPI · WebSocket · Session Management · Multi-Tenant Auth"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="180" width="1360" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="201" value="🔐 JWT / API Key Auth&lt;br&gt;per-tenant"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="40" y="218" width="185" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="202" value="⚡ FastAPI REST&lt;br&gt;+ SSE Streaming"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="245" y="218" width="185" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="203" value="🌊 WebSocket&lt;br&gt;Streaming"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="450" y="218" width="165" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="204" value="📦 Session Manager&lt;br&gt;(Redis-backed per tenant)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="635" y="218" width="195" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="205" value="🛡️ Request Validator&lt;br&gt;+ Input Sanitiser"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="850" y="218" width="185" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="206" value="🏢 Multi-Tenant&lt;br&gt;Request Router"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1055" y="218" width="185" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L1 → L2 -->
+    <mxCell id="e002" value="Validated Request"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#6c8ebf;"
+      edge="1" source="200" target="300" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 2 — AI GATEWAY LAYER                                 -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="300" value="&lt;b&gt;LAYER 2 — AI GATEWAY LAYER&lt;/b&gt;  |  Rate Limiting · Provider Routing · Cost Control · Circuit Breaker"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="340" width="1360" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="301" value="⏱️ Rate Limiter&lt;br&gt;(Token Bucket / tenant)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="40" y="378" width="205" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="302" value="🔀 Provider Router&lt;br&gt;(Primary → Fallback chain)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="265" y="378" width="205" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="303" value="💰 Cost Tracker&lt;br&gt;(tokens / $ / day)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="490" y="378" width="185" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="304" value="⚡ Circuit Breaker&lt;br&gt;+ Exponential Backoff"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="695" y="378" width="195" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="305" value="🔑 API Key Rotation&lt;br&gt;+ Credential Manager"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="910" y="378" width="195" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L2 → L3 -->
+    <mxCell id="e003" value="Rate-Checked · Routed Request"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#9673a6;"
+      edge="1" source="300" target="400" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 3 — ORCHESTRATION LAYER                              -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="400" value="&lt;b&gt;LAYER 3 — ORCHESTRATION LAYER&lt;/b&gt;  |  LangGraph StateGraph · Supervisor · Planner · Discovery · Inference Agents"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="500" width="1360" height="245" as="geometry" />
+    </mxCell>
+
+    <!-- StateGraph inner container -->
+    <mxCell id="410" value="&lt;b&gt;LangGraph StateGraph (ConversationState)&lt;/b&gt;"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9ffe0;strokeColor=#82b366;fontSize=10;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="30" y="530" width="855" height="200" as="geometry" />
+    </mxCell>
+
+    <!-- StateGraph nodes -->
+    <mxCell id="411" value="START"
+      style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;fontColor=#ffffff;strokeColor=#000000;fontSize=9;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="55" y="605" width="60" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="412" value="classify_input"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;"
+      vertex="1" parent="1">
+      <mxGeometry x="140" y="597" width="118" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="413" value="DATABASE&lt;br&gt;QUERY?"
+      style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;"
+      vertex="1" parent="1">
+      <mxGeometry x="287" y="588" width="108" height="66" as="geometry" />
+    </mxCell>
+    <mxCell id="414" value="discover_database&lt;br&gt;(CACHE HIT = skip)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;"
+      vertex="1" parent="1">
+      <mxGeometry x="425" y="558" width="140" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="415" value="create_plan&lt;br&gt;(PlannerAgent)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;"
+      vertex="1" parent="1">
+      <mxGeometry x="425" y="618" width="140" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="416" value="execute_plan&lt;br&gt;(SupervisorAgent)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;"
+      vertex="1" parent="1">
+      <mxGeometry x="595" y="588" width="130" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="417" value="generate_response"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;"
+      vertex="1" parent="1">
+      <mxGeometry x="750" y="588" width="120" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="418" value="END"
+      style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;fontColor=#ffffff;strokeColor=#000000;fontSize=9;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="830" y="685" width="45" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- StateGraph internal edges -->
+    <mxCell id="sg1" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;"
+      edge="1" source="411" target="412" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sg2" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;"
+      edge="1" source="412" target="413" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sg3" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;exitX=1;exitY=0.3;exitDx=0;exitDy=0;"
+      edge="1" source="413" target="414" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sg4" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;"
+      edge="1" source="414" target="415" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sg5" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;"
+      edge="1" source="415" target="416" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sg6" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;"
+      edge="1" source="416" target="417" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sg7" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;exitX=1;exitY=0.7;exitDx=0;exitDy=0;"
+      edge="1" source="413" target="417" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="435" y="700" />
+          <mxPoint x="810" y="700" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sg8" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=8;strokeColor=#555555;"
+      edge="1" source="417" target="418" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Agent boxes -->
+    <mxCell id="420" value="🤖 SupervisorAgent&lt;br&gt;Stateful Orchestrator"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#82b366;fontColor=#ffffff;strokeColor=#5d8a4a;fontSize=10;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="920" y="538" width="195" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="421" value="📋 PlannerAgent&lt;br&gt;Stateless · Decomposes query"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="920" y="610" width="195" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="422" value="🔍 DiscoveryAgent&lt;br&gt;Stateless · READ-ONLY&lt;br&gt;Builds schema graph"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1135" y="538" width="200" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="423" value="📊 InferenceAgent&lt;br&gt;Stateless · READ-ONLY&lt;br&gt;Executes SELECT queries"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1135" y="610" width="200" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L3 → L4 -->
+    <mxCell id="e004" value="LLM Calls"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#82b366;"
+      edge="1" source="400" target="500" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 4 — MODEL LAYER                                      -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="500" value="&lt;b&gt;LAYER 4 — MODEL LAYER&lt;/b&gt;  |  Cloud-Agnostic ModelRegistry · Azure OpenAI · OpenAI · AWS Bedrock · Fallback Chain"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="765" width="1360" height="155" as="geometry" />
+    </mxCell>
+    <mxCell id="501" value="📚 ModelRegistry&lt;br&gt;Fallback Chain&lt;br&gt;Task → Tier mapping"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d79b00;fontColor=#ffffff;strokeColor=#b46504;fontSize=10;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="40" y="808" width="185" height="72" as="geometry" />
+    </mxCell>
+    <mxCell id="502" value="☁️ Azure OpenAI&lt;br&gt;AzureChatOpenAI&lt;br&gt;gpt-4o · gpt-4o-mini&lt;br&gt;[PRIMARY]"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#0078d4;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="260" y="800" width="195" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="503" value="🟢 OpenAI&lt;br&gt;ChatOpenAI&lt;br&gt;gpt-4o · gpt-4-turbo&lt;br&gt;[FALLBACK 1]"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4f4e3;strokeColor=#10a37f;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="480" y="800" width="195" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="504" value="🟠 AWS Bedrock&lt;br&gt;ChatBedrock&lt;br&gt;Claude 3.5 · Haiku&lt;br&gt;[FALLBACK 2]"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe8cc;strokeColor=#ff9900;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="700" y="800" width="195" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="505" value="🎯 ModelSelector&lt;br&gt;task-type + cost policy&lt;br&gt;HEAVY / MEDIUM / LIGHT"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="930" y="808" width="200" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- Fallback chain arrows inside L4 -->
+    <mxCell id="fl1" value="1st" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=9;strokeColor=#d79b00;exitX=1;exitY=0.5;entryX=0;entryY=0.5;"
+      edge="1" source="501" target="502" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="fl2" value="2nd" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=9;strokeColor=#d79b00;exitX=1;exitY=0.5;entryX=0;entryY=0.5;"
+      edge="1" source="502" target="503" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="fl3" value="3rd" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=9;strokeColor=#d79b00;exitX=1;exitY=0.5;entryX=0;entryY=0.5;"
+      edge="1" source="503" target="504" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L4 → AI Providers panel -->
+    <mxCell id="e005" value="LLM API Calls"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#d79b00;"
+      edge="1" source="500" target="1000" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L4 → L5 -->
+    <mxCell id="e006" value="Schema Context Request"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#d6b656;"
+      edge="1" source="500" target="600" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 5 — RAG LAYER                                        -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="600" value="&lt;b&gt;LAYER 5 — RAG LAYER&lt;/b&gt;  |  Schema Graph · Vector Store · Context Retrieval · Embedding Cache"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="940" width="1360" height="145" as="geometry" />
+    </mxCell>
+    <mxCell id="601" value="🕸️ Schema Graph&lt;br&gt;NetworkX (dev)&lt;br&gt;Neo4j (prod)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="40" y="978" width="185" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="602" value="🔢 Vector Store&lt;br&gt;Chroma / Pinecone&lt;br&gt;(schema embeddings)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="250" y="978" width="185" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="603" value="🔎 Context Retriever&lt;br&gt;Graph traversal +&lt;br&gt;Semantic search"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="460" y="978" width="185" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="604" value="⚡ Schema Cache&lt;br&gt;Redis TTL=1h&lt;br&gt;Per-DB / per-tenant"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="670" y="978" width="185" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="605" value="📐 Embedding Cache&lt;br&gt;Avoids re-embedding&lt;br&gt;static schema"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="880" y="978" width="185" height="68" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L5 → L6 -->
+    <mxCell id="e007" value="Enriched Schema Context → SQL Generation"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#b85450;"
+      edge="1" source="600" target="700" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 6 — SECURITY LAYER                                   -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="700" value="&lt;b&gt;LAYER 6 — SECURITY LAYER&lt;/b&gt;  |  3-Level Read-Only SQL Enforcement · PII Masking · RBAC · Immutable Audit Trail"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="1105" width="1360" height="185" as="geometry" />
+    </mxCell>
+
+    <!-- 3-level enforcement sub-panel -->
+    <mxCell id="710" value="&lt;b&gt;READ-ONLY ENFORCEMENT — 3 Layers of Defence&lt;/b&gt;"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#b85450;fontSize=10;verticalAlign=top;align=center;"
+      vertex="1" parent="1">
+      <mxGeometry x="30" y="1135" width="870" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="701" value="🛡️ Level 1: Prompt Guard&lt;br&gt;System prompt forbids&lt;br&gt;DDL / DML generation"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="50" y="1163" width="185" height="88" as="geometry" />
+    </mxCell>
+    <mxCell id="702" value="🛡️🛡️ Level 2: SQL AST Parser&lt;br&gt;sqlglot — blocks INSERT&lt;br&gt;UPDATE DELETE DROP&lt;br&gt;CREATE ALTER TRUNCATE"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="260" y="1163" width="195" height="88" as="geometry" />
+    </mxCell>
+    <mxCell id="703" value="🛡️🛡️🛡️ Level 3: DB Credentials&lt;br&gt;Read-only DB user&lt;br&gt;GRANT SELECT only&lt;br&gt;Startup assertion"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="480" y="1163" width="195" height="88" as="geometry" />
+    </mxCell>
+    <mxCell id="704" value="⚠️ ReadOnlyViolationError&lt;br&gt;→ Alert fired&lt;br&gt;→ Audit logged&lt;br&gt;→ SQL never reaches DB"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#b85450;fontSize=10;fontStyle=2;"
+      vertex="1" parent="1">
+      <mxGeometry x="695" y="1163" width="185" height="88" as="geometry" />
+    </mxCell>
+    <mxCell id="705" value="🔒 PII Masker&lt;br&gt;Microsoft Presidio&lt;br&gt;Masks response output"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="930" y="1143" width="185" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="706" value="👤 RBAC&lt;br&gt;Per-tenant table ACLs"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="930" y="1222" width="185" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="707" value="📝 Audit Logger&lt;br&gt;SQL hash (not raw)&lt;br&gt;90-day retention"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1135" y="1143" width="185" height="68" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L6 → L7 -->
+    <mxCell id="e008" value="Validated READ-ONLY SQL"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#666666;"
+      edge="1" source="700" target="800" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 7 — INFRASTRUCTURE LAYER                             -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="800" value="&lt;b&gt;LAYER 7 — INFRASTRUCTURE LAYER&lt;/b&gt;  |  Kubernetes · Multi-DB Adapters · Connection Pool · Redis · Secrets Management"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="1310" width="1360" height="155" as="geometry" />
+    </mxCell>
+    <mxCell id="801" value="☸️ Kubernetes&lt;br&gt;HPA: 2–20 pods&lt;br&gt;Readiness + Liveness"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#326ce5;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="40" y="1350" width="185" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="802" value="🗄️ DB Adapter Factory&lt;br&gt;SQLAlchemy multi-dialect&lt;br&gt;SQLite/PG/MySQL/MSSQL"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="250" y="1350" width="195" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="803" value="🔗 Connection Pool&lt;br&gt;pool_size=5&lt;br&gt;max_overflow=10"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="470" y="1350" width="175" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="804" value="⚡ Redis Cache&lt;br&gt;Session state&lt;br&gt;Schema graphs"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#dc382d;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="670" y="1350" width="175" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="805" value="🔑 Secrets Manager&lt;br&gt;AWS SM / Azure KV&lt;br&gt;HashiCorp Vault"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="870" y="1350" width="185" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L7 → Target DBs panel -->
+    <mxCell id="e009" value="SELECT (read-only pool)"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#666666;"
+      edge="1" source="800" target="1100" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow: L7 → L8 -->
+    <mxCell id="e010" value="Telemetry"
+      style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontStyle=2;strokeColor=#27ae60;"
+      edge="1" source="800" target="900" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 8 — OBSERVABILITY LAYER                              -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="900" value="&lt;b&gt;LAYER 8 — OBSERVABILITY / EXPLAINABILITY LAYER&lt;/b&gt;  |  OpenTelemetry · Prometheus · Grafana · Agent Audit · Alerting"
+      style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#27ae60;fontSize=11;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="1485" width="1360" height="165" as="geometry" />
+    </mxCell>
+    <mxCell id="901" value="📡 OpenTelemetry&lt;br&gt;Distributed tracing&lt;br&gt;span per agent node"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#27ae60;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="40" y="1525" width="185" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="902" value="📊 Prometheus&lt;br&gt;query_latency&lt;br&gt;llm_tokens_used&lt;br&gt;sql_blocked_total"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e6522c;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="250" y="1525" width="175" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="903" value="📈 Grafana Dashboards&lt;br&gt;Schema cache ratio&lt;br&gt;Provider health"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#f46800;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="450" y="1525" width="175" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="904" value="📝 Structured Logger&lt;br&gt;structlog JSON&lt;br&gt;ELK / CloudWatch"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#27ae60;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="650" y="1525" width="175" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="905" value="🚨 Alert Manager&lt;br&gt;PagerDuty / SNS&lt;br&gt;sql_blocked&gt;0 · p99&gt;30s"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#27ae60;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="850" y="1525" width="185" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="906" value="🔍 Agent Decision Audit&lt;br&gt;question→plan→SQL→response&lt;br&gt;Explainability trail"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#27ae60;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1060" y="1525" width="200" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Observability taps all layers (dashed lines from key layers) -->
+    <mxCell id="obs1" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;strokeColor=#27ae60;fontSize=8;exitX=0.95;exitY=1;entryX=0.95;entryY=0;endArrow=none;"
+      edge="1" source="200" target="900" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1372" y="320" />
+          <mxPoint x="1372" y="1485" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="obs_label" value="📡 All layers emit OTel spans&lt;br&gt;to Observability Layer"
+      style="text;html=1;strokeColor=#27ae60;fillColor=#d5f5e3;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=8;dashed=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="1375" y="870" width="25" height="400" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- RIGHT PANEL — AI PROVIDERS                                 -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="1000" value="&lt;b&gt;☁️ EXTERNAL AI PROVIDERS&lt;/b&gt;&lt;br&gt;Cloud-Agnostic via LangChain"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8e8ff;strokeColor=#6666cc;fontSize=11;verticalAlign=top;align=center;"
+      vertex="1" parent="1">
+      <mxGeometry x="1420" y="765" width="360" height="320" as="geometry" />
+    </mxCell>
+    <mxCell id="1001" value="☁️ Azure OpenAI (PRIMARY)&lt;br&gt;AzureChatOpenAI&lt;br&gt;gpt-4o (Discovery · Planning)&lt;br&gt;gpt-4o-mini (Inference · Chat)&lt;br&gt;ManagedIdentity / API Key"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#0078d4;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="815" width="330" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="1002" value="🟢 OpenAI (FALLBACK 1)&lt;br&gt;ChatOpenAI&lt;br&gt;gpt-4o · gpt-4-turbo&lt;br&gt;Direct API Key"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4f4e3;strokeColor=#10a37f;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="907" width="330" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="1003" value="🟠 AWS Bedrock (FALLBACK 2)&lt;br&gt;ChatBedrock&lt;br&gt;Claude 3.5 Sonnet · Claude Haiku&lt;br&gt;IAM Role (no explicit key on AWS)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe8cc;strokeColor=#ff9900;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="989" width="330" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- RIGHT PANEL — TARGET DATABASES                             -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="1100" value="&lt;b&gt;🗄️ TARGET DATABASES&lt;/b&gt;&lt;br&gt;Read-Only · All connections SELECT-only"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0ff;strokeColor=#666699;fontSize=11;verticalAlign=top;align=center;"
+      vertex="1" parent="1">
+      <mxGeometry x="1420" y="1310" width="360" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="1101" value="🐘 PostgreSQL&lt;br&gt;GRANT SELECT only"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#336791;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="1358" width="158" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="1102" value="🐬 MySQL / MariaDB&lt;br&gt;Read replica"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00618a;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1608" y="1358" width="158" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="1103" value="🪟 MS SQL Server&lt;br&gt;SELECT-only user"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc2927;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="1420" width="158" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="1104" value="🗃️ SQLite&lt;br&gt;?mode=ro URI"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#003b57;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1608" y="1420" width="158" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="1105" value="❄️ Snowflake&lt;br&gt;Read-only role"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#29b5e8;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="1482" width="158" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="1106" value="🔵 BigQuery&lt;br&gt;Viewer IAM role"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4285f4;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1608" y="1482" width="158" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="1107" value="⚠️ Startup assertion verifies each connection is truly read-only before accepting traffic"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#b85450;fontSize=9;fontStyle=2;"
+      vertex="1" parent="1">
+      <mxGeometry x="1435" y="1544" width="330" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- RIGHT PANEL — LEGEND                                       -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="1200" value="&lt;b&gt;LEGEND&lt;/b&gt;"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontSize=11;verticalAlign=top;align=center;"
+      vertex="1" parent="1">
+      <mxGeometry x="1420" y="85" width="360" height="655" as="geometry" />
+    </mxCell>
+    <mxCell id="1201" value="Layer 1 — Consumer"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="125" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1202" value="Layer 2 — AI Gateway"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="168" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1203" value="Layer 3 — Orchestration (LangGraph)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="211" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1204" value="Layer 4 — Model (Cloud-Agnostic)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="254" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1205" value="Layer 5 — RAG (Schema + Vectors)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="297" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1206" value="Layer 6 — Security (3-level READ-ONLY)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="340" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1207" value="Layer 7 — Infrastructure (K8s + DBs)"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="383" width="322" height="32" as="geometry" />
+    </mxCell>
+    <mxCell id="1208" value="Layer 8 — Observability / Explainability"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#27ae60;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="426" width="322" height="32" as="geometry" />
+    </mxCell>
+    <!-- Divider -->
+    <mxCell id="1209" value="── Main Request Flow"
+      style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1445" y="480" width="200" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="1210" value="- - - Telemetry Flow (all layers → L8)"
+      style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1445" y="507" width="300" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="1211" value="← → External API / DB Calls"
+      style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;"
+      vertex="1" parent="1">
+      <mxGeometry x="1445" y="534" width="300" height="24" as="geometry" />
+    </mxCell>
+    <!-- Key facts -->
+    <mxCell id="1212" value="&lt;b&gt;KEY GUARANTEES&lt;/b&gt;&lt;br&gt;✅ Read-only: 3-level enforcement&lt;br&gt;✅ Cloud-agnostic: swap provider via config&lt;br&gt;✅ Schema cached: discovery runs once/session&lt;br&gt;✅ Multi-tenant: isolated state + rate limits&lt;br&gt;✅ Audit: every query hashed + logged&lt;br&gt;✅ Observability: OTel span per agent node"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#333333;fontSize=10;verticalAlign=top;align=left;"
+      vertex="1" parent="1">
+      <mxGeometry x="1438" y="575" width="322" height="148" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- REQUEST FLOW SEQUENCE (bottom)                             -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="1300" value="&lt;b&gt;TYPICAL REQUEST FLOW&lt;/b&gt;  →  &lt;b&gt;[L1]&lt;/b&gt; Auth + session load  →  &lt;b&gt;[L2]&lt;/b&gt; Rate check + provider select  →  &lt;b&gt;[L3]&lt;/b&gt; classify → discover(CACHE) → plan → execute  →  &lt;b&gt;[L5]&lt;/b&gt; Schema context injected  →  &lt;b&gt;[L4]&lt;/b&gt; LLM generates SQL  →  &lt;b&gt;[L6]&lt;/b&gt; AST validates SELECT-only  →  &lt;b&gt;[L7]&lt;/b&gt; Pool executes query  →  &lt;b&gt;[L8]&lt;/b&gt; Span + metrics emitted  →  &lt;b&gt;[L1]&lt;/b&gt; Response streamed"
+      style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;fontColor=#ffffff;strokeColor=#1a1a2e;fontSize=10;align=left;verticalAlign=middle;"
+      vertex="1" parent="1">
+      <mxGeometry x="10" y="1668" width="1760" height="48" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
