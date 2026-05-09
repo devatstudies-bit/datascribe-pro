@@ -1,0 +1,16 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+docs/
+k8s/
+docker/
+data/*.db
+data/*.sqlite
+*.md
+.DS_Store
+.pytest_cache/
+htmlcov/

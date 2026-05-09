@@ -89,11 +89,50 @@ DATABASE_URL=sqlite:///data/chinook.db
 
 ### 3. Run
 
+**Local (Python)**
 ```bash
 python main.py
 ```
 
-Open [http://localhost:8000](http://localhost:8000) in your browser.
+**Docker Compose** (includes Prometheus, Grafana, Jaeger)
+```bash
+cp .env.example .env        # fill in your API keys
+docker compose -f docker/docker-compose.yml up --build
+```
+
+| Service | URL |
+|---|---|
+| Chat UI | http://localhost:8000 |
+| Prometheus | http://localhost:9090 |
+| Grafana | http://localhost:3000 (admin / admin) |
+| Jaeger UI | http://localhost:16686 |
+
+---
+
+## Kubernetes Deployment
+
+```bash
+# 1. Create namespace
+kubectl apply -f k8s/namespace.yaml
+
+# 2. Apply non-secret config
+kubectl apply -f k8s/configmap.yaml
+
+# 3. Fill in k8s/secret.yaml with base64-encoded values, then apply
+#    (or use External Secrets Operator pointing to AWS SM / Azure KV / Vault)
+kubectl apply -f k8s/secret.yaml
+
+# 4. Deploy the app, service, ingress, and autoscaler
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/hpa.yaml
+
+# 5. Check rollout
+kubectl rollout status deployment/datascribe-pro -n datascribe
+```
+
+The HPA scales between **2 and 20 replicas** based on CPU (70%) and memory (80%) utilisation.
+For AWS Bedrock on EKS, annotate the `ServiceAccount` in `k8s/deployment.yaml` with your IAM role ARN (IRSA) — no access keys needed.
 
 ---
 

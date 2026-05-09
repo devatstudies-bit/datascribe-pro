@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datascribe-pro
+  namespace: datascribe
+  labels:
+    app: datascribe-pro
+    version: "1.0.0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: datascribe-pro
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0        # zero-downtime deploys
+  template:
+    metadata:
+      labels:
+        app: datascribe-pro
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: datascribe-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+
+      containers:
+        - name: api
+          image: ghcr.io/devatstudies-bit/datascribe-pro:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+          # Pull non-secret config from ConfigMap
+          envFrom:
+            - configMapRef:
+                name: datascribe-config
+
+          # Pull secrets individually so they never appear in plain env dumps
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: datascribe-secrets
+                  key: OPENAI_API_KEY
+                  optional: true
+            - name: AZURE_OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: datascribe-secrets
+                  key: AZURE_OPENAI_API_KEY
+                  optional: true
+            - name: AZURE_OPENAI_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: datascribe-secrets
+                  key: AZURE_OPENAI_ENDPOINT
+                  optional: true
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: datascribe-secrets
+                  key: DATABASE_URL
+
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 3
+
+          # Graceful shutdown — give in-flight WebSocket queries time to finish
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "5"]
+
+      terminationGracePeriodSeconds: 30
+---
+# Minimal ServiceAccount — extend with IAM role annotations for Bedrock (EKS IRSA)
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: datascribe-sa
+  namespace: datascribe
+  # For AWS Bedrock on EKS — annotate with IAM role ARN:
+  # annotations:
+  #   eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/datascribe-bedrock-role

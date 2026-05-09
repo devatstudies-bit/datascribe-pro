@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datascribe-config
+  namespace: datascribe
+data:
+  # Layer 1
+  APP_HOST: "0.0.0.0"
+  APP_PORT: "8000"
+
+  # Layer 3
+  AGENT_MAX_ITERATIONS: "10"
+  MAX_RESULT_ROWS: "500"
+
+  # Layer 4 — provider selection (openai | azure_openai | bedrock)
+  LLM_PROVIDER: "openai"
+  OPENAI_MODEL_HEAVY: "gpt-4o"
+  OPENAI_MODEL_LIGHT: "gpt-4o-mini"
+  AZURE_OPENAI_API_VERSION: "2024-08-01-preview"
+  AZURE_DEPLOYMENT_HEAVY: "gpt-4o"
+  AZURE_DEPLOYMENT_LIGHT: "gpt-4o-mini"
+  AWS_REGION: "us-east-1"
+
+  # Layer 8
+  OTLP_ENDPOINT: "http://jaeger-collector.observability.svc.cluster.local:4317"

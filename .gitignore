@@ -36,3 +36,9 @@ data/*.sqlite
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Docker
+docker/*.env
+
+# Kubernetes — never commit a secret.yaml with real values
+# k8s/secret.yaml is safe to commit as it only contains placeholders
